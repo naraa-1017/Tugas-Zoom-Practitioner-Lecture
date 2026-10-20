@@ -131,3 +131,29 @@ Hasil dashboard baru menunjukkan empat layanan melewati target, yaitu Lansia (61
 **Peran Pengguna dalam Perancangan:**
 
 Desain yang baik tidak berhenti pada tampilan yang menarik. Rancangan dashboard sebaiknya diuji langsung dengan petugas puskesmas yang menggunakannya, karena pengembang tidak bisa berasumsi bahwa tampilan yang jelas bagi dirinya juga jelas bagi pengguna. Masukan dari petugas, misalnya soal ukuran tulisan atau pilihan warna bagi pengguna yang buta warna, dipakai untuk menyempurnakan desain berikutnya.
+
+# Studi Kasus 6: Klasifikasi Penyebab Hilangnya Hutan Mangrove Berbasis Citra Satelit dan AI (Berdasarkan Sesi 6: Attributing Direct Drivers to Deforestation Alerts with Satellite Imagery and AI)
+
+**Latar Belakang & Masalah:**
+
+Sebuah yayasan konservasi di pesisir Teluk Biru memantau hutan mangrove yang terus berkurang. Sistem peringatan dini sudah mampu mendeteksi lokasi tutupan pohon yang hilang, tetapi petugas belum tahu penyebabnya, apakah pembukaan tambak, pembangunan jalan, penebangan, atau pertambangan. Tanpa mengetahui penyebabnya, tindak lanjut di lapangan menjadi lambat dan tidak tepat sasaran. Kawasan pesisir juga sering tertutup awan, sehingga citra optik saja tidak cukup.
+
+**Pendekatan & Solusi Berbasis AI dan Citra Satelit:**
+
+| Komponen | Penerapan |
+|---|---|
+| Data optik | Penurunan indeks vegetasi (NDVI) dari citra optik untuk mengukur seberapa parah tutupan pohon berkurang. |
+| Data radar | Perubahan hamburan balik (backscatter) dari citra radar yang dapat menembus awan sehingga pemantauan tetap berjalan saat cuaca mendung. |
+| Data pendukung | Luas area yang hilang, jarak ke jalan, dan ada tidaknya indikasi api. |
+| Model | Random Forest dengan pembobotan kelas (class_weight) agar kelas yang jarang tetap diperhatikan. |
+| Kelas penyebab | Tambak, pembukaan jalan, penebangan, dan pertambangan. |
+
+**Hasil dan Penilaian Akurasi:**
+
+Model dilatih dengan 1.000 peringatan sintetis dan diuji pada 250 data. Overall accuracy mencapai 86,4%, sedangkan Macro F1-Score sebesar 0,83. Kelas pertambangan hanya berjumlah 5% dari data. Presisinya 1,00, tetapi recall hanya 0,69, artinya sebagian kejadian tambang masih terlewat. Kelas penebangan juga paling sulit dikenali (F1-Score 0,71) karena cirinya mirip dengan pembukaan jalan. Karena itu, evaluasi tidak cukup memakai overall accuracy saja, sebab akurasi yang tinggi bisa menutupi kelas minoritas yang justru penting.
+
+Fitur yang paling berpengaruh adalah perubahan radar, luas area, dan jarak ke jalan.
+
+**Peran Manusia dalam Menindaklanjuti Hasil:**
+
+Hasil klasifikasi berfungsi sebagai prioritas awal, bukan vonis. Petugas lapangan tetap perlu memverifikasi lokasi yang diprediksi sebagai tambang atau penebangan sebelum mengambil langkah hukum atau pemulihan. Hasil di lapangan kemudian dikembalikan sebagai data latih baru, sehingga model makin akurat seiring waktu.
