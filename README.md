@@ -108,3 +108,26 @@ Model mencapai akurasi 83,7% pada data uji. Dari confusion matrix, 74 paket terl
 **Peran Manusia dalam Sistem Prediksi:**
 
 Model hanya memberi peringatan awal, bukan keputusan akhir. Operator tetap menentukan tindakan, misalnya menugaskan kurir yang lebih berpengalaman untuk rute jauh saat hujan atau menginformasikan estimasi baru kepada pelanggan. Data juga perlu dievaluasi berkala, karena pola pengiriman bisa berubah dan model yang dulu akurat bisa menurun kualitasnya.
+
+# Studi Kasus 5: Redesain Dashboard Waktu Tunggu Puskesmas (Human-Computer Interaction & Data Visualization) (Berdasarkan Sesi 5: Human-Computer Interaction & Data Visualization)
+
+**Latar Belakang & Masalah:**
+
+Puskesmas Sehat Sentosa memiliki dashboard internal untuk memantau waktu tunggu pasien di enam layanan: Umum, Gigi, KIA, Lansia, Gizi, dan Laboratorium. Dashboard lama menampilkan data dalam diagram lingkaran (pie chart) dengan warna acak. Petugas kesulitan membandingkan layanan mana yang paling lama menunggu, dan sering terlambat menyadari antrean yang menumpuk. Padahal target puskesmas adalah waktu tunggu maksimal 30 menit.
+
+**Pendekatan & Solusi HCI dan Visualisasi Data:**
+
+- **Memilih jenis grafik yang tepat:** Diagram lingkaran cocok untuk bagian dari keseluruhan, bukan untuk membandingkan nilai antar kategori. Karena itu diganti dengan diagram batang horizontal yang diurutkan, sehingga layanan dengan waktu tunggu terlama langsung terlihat paling atas.
+- **Memanfaatkan pre-attentive attributes:** Warna merah hanya dipakai untuk layanan yang melewati target 30 menit, sedangkan sisanya berwarna abu-abu. Perbedaan warna ini ditangkap mata dalam sekejap tanpa perlu membaca angka satu per satu.
+- **Meminimalkan beban kognitif (cognitive load):** Elemen yang tidak diperlukan, seperti garis bingkai atas dan kanan serta warna pelangi, dihilangkan agar perhatian petugas tertuju pada data.
+- **Recognition over recall:** Garis putus-putus target 30 menit dan label nilai di ujung tiap batang membuat petugas tidak perlu mengingat target atau menebak angka dari sumbu.
+
+**Hasil Visualisasi:**
+
+Hasil dashboard baru menunjukkan empat layanan melewati target, yaitu Lansia (61 menit), Umum (48 menit), Laboratorium (40 menit), dan KIA (35 menit). Layanan Gigi (22 menit) dan Gizi (18 menit) sudah sesuai target.
+
+![Hasil Visualisasi](hasil_visualisasi.png)
+
+**Peran Pengguna dalam Perancangan:**
+
+Desain yang baik tidak berhenti pada tampilan yang menarik. Rancangan dashboard sebaiknya diuji langsung dengan petugas puskesmas yang menggunakannya, karena pengembang tidak bisa berasumsi bahwa tampilan yang jelas bagi dirinya juga jelas bagi pengguna. Masukan dari petugas, misalnya soal ukuran tulisan atau pilihan warna bagi pengguna yang buta warna, dipakai untuk menyempurnakan desain berikutnya.
