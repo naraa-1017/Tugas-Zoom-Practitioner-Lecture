@@ -1,11 +1,3 @@
-"""
-Studi Kasus 3: Pemilihan Lokasi Gerai Baru Minimarket Menggunakan GIS
-Berdasarkan Sesi 3: Career and Competition in Industrial Era with GIS
-
-Analisis spasial sederhana: buffer radius, jarak ke kompetitor, lalu skoring lokasi.
-Data dibuat otomatis (sintetis). Cara menjalankan: python studikasus_3.py
-(butuh: pip install pandas numpy)
-"""
 import numpy as np
 import pandas as pd
 
@@ -28,7 +20,6 @@ def jarak_km(lat1, lon1, lat2, lon2):
     return 6371 * 2 * np.arcsin(np.sqrt(a))
 
 
-# --- Layer data spasial ---
 lat_p, lon_p = acak(400)                      # titik permukiman
 lat_k, lon_k = acak(5)                        # minimarket kompetitor
 lat_c, lon_c = acak(6, 0.025)                 # 6 lokasi kandidat gerai
@@ -37,7 +28,6 @@ kandidat = pd.DataFrame({
     "sewa_juta": np.random.randint(40, 120, 6),
 })
 
-# --- Analisis spasial per kandidat ---
 penduduk, jarak_komp = [], []
 for i in range(len(kandidat)):
     d_rumah = jarak_km(lat_c[i], lon_c[i], lat_p, lon_p)
@@ -52,7 +42,7 @@ def norm(x):
     return (x - x.min()) / (x.max() - x.min())
 
 
-# --- Skoring: makin banyak rumah, makin jauh dari kompetitor, makin murah = makin baik ---
+
 kandidat["skor"] = (0.5 * norm(kandidat["rumah_dlm_1km"])
                     + 0.3 * norm(kandidat["jarak_kompetitor_km"])
                     + 0.2 * (1 - norm(kandidat["sewa_juta"]))).round(2)
