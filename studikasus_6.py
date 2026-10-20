@@ -1,11 +1,3 @@
-"""
-Studi Kasus 6: Klasifikasi Penyebab Kehilangan Hutan Mangrove dengan Citra Satelit dan AI
-Berdasarkan Sesi 6: Attributing Direct Drivers to Deforestation Alerts with Satellite Imagery and AI
-
-Setiap peringatan (alert) dicirikan oleh data optik (penurunan NDVI) dan radar (perubahan
-backscatter), lalu diklasifikasikan penyebabnya. Data sintetis.
-Cara menjalankan: python studikasus_6.py   (butuh: pip install pandas numpy scikit-learn)
-"""
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
@@ -14,7 +6,7 @@ from sklearn.model_selection import train_test_split
 
 np.random.seed(5)
 
-# Ciri tiap penyebab: (ndvi_turun, radar_db, luas_ha, jarak_jalan_km, ada_api) + jumlah alert
+
 penyebab = {
     "Tambak":           ([0.45, -3.0, 8.0, 2.0, 0.1], 500),
     "Pembukaan jalan":  ([0.30, -1.5, 2.0, 0.3, 0.0], 250),
