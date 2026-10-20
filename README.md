@@ -80,3 +80,31 @@ Hasil skoring menempatkan Lokasi 3 di peringkat pertama dengan skor 0,76, karena
 **Peran GIS dan Kompetensi Karier di Era Industri:**
 
 GIS mengubah data lokasi yang tadinya tersebar menjadi informasi yang bisa dibandingkan secara objektif, sehingga perusahaan tidak lagi memilih lokasi hanya berdasarkan intuisi. Bagi lulusan informatika, kemampuan mengolah data spasial menjadi nilai tambah karier di berbagai industri seperti ritel, logistik, dan perencanaan kota. Meski begitu, skor hanya alat bantu. Faktor lain seperti izin usaha, kondisi jalan, dan rencana pengembangan wilayah tetap perlu dinilai manajemen sebelum keputusan akhir diambil.
+
+# Studi Kasus 4: Prediksi Keterlambatan Pengiriman Paket dengan Machine Learning (Berdasarkan Sesi 4: Introduction to Machine Learning)
+
+**Latar Belakang Kasus:**
+
+KilatKirim adalah perusahaan jasa kurir yang melayani ribuan paket setiap hari. Belakangan, keluhan pelanggan soal paket terlambat terus meningkat, tetapi manajemen baru mengetahuinya setelah paket benar-benar terlambat. Tim data diminta membangun sistem berbasis Machine Learning yang dapat memprediksi paket berisiko terlambat sebelum dikirim, sehingga operator bisa mengambil tindakan lebih awal.
+
+**Alur dan Penerapan Metode Machine Learning:**
+
+**1. Pengumpulan dan Pra-pemrosesan Data (Data Preprocessing)**
+
+Tim menggunakan data riwayat pengiriman yang berisi jarak tempuh, berat paket, kondisi hujan, dan pengalaman kurir (dalam bulan). Data duplikat dan nilai kosong dibersihkan, lalu seluruh fitur diseragamkan skalanya dengan standardisasi agar tidak ada fitur yang mendominasi hanya karena satuannya besar.
+
+**2. Unsupervised Learning (Mengelompokkan Pola Pengiriman)**
+
+Metode K-Means membagi pengiriman menjadi 3 klaster tanpa memakai label. Hasilnya, klaster 0 memiliki tingkat keterlambatan tertinggi (54,6%), klaster 1 sedang (30,4%), dan klaster 2 terendah (19,6%). Pengelompokan ini membantu manajemen menemukan jenis pengiriman yang paling rawan terlambat.
+
+**3. Supervised Learning (Klasifikasi Terlambat vs Tepat Waktu)**
+
+Berdasarkan data historis yang sudah berlabel, algoritma Logistic Regression dilatih untuk memprediksi apakah sebuah paket akan terlambat. Data dibagi 80% untuk pelatihan dan 20% untuk pengujian. Dari koefisien model, jarak tempuh dan hujan meningkatkan risiko keterlambatan, sedangkan pengalaman kurir menurunkannya.
+
+**4. Evaluasi Model dan Dampaknya bagi Pelanggan**
+
+Model mencapai akurasi 83,7% pada data uji. Dari confusion matrix, 74 paket terlambat berhasil terdeteksi (TP), 177 paket tepat waktu terbaca benar (TN), 21 paket salah ditandai terlambat (FP), dan 28 paket terlambat terlewat (FN). Nilai FN perlu diperhatikan karena paket terlambat yang tidak terdeteksi tetap merugikan pelanggan.
+
+**Peran Manusia dalam Sistem Prediksi:**
+
+Model hanya memberi peringatan awal, bukan keputusan akhir. Operator tetap menentukan tindakan, misalnya menugaskan kurir yang lebih berpengalaman untuk rute jauh saat hujan atau menginformasikan estimasi baru kepada pelanggan. Data juga perlu dievaluasi berkala, karena pola pengiriman bisa berubah dan model yang dulu akurat bisa menurun kualitasnya.
