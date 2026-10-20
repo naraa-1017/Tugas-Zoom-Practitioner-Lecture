@@ -1,22 +1,7 @@
-"""
-Studi Kasus 2: Simulasi Risiko Banjir Kota Menggunakan HPC (High Performance Computing)
-Berdasarkan Sesi 2: Bridging Global Infrastructure to Address Local Challenge with HPC
-
-Alur sesuai README:
-  1. Pemodelan masalah dan data
-  2. Simulasi Monte Carlo skala besar (8 juta skenario)
-  3. Pemrosesan paralel dengan MPI
-  4. Hasil dan rekomendasi tindakan
-
-Cara menjalankan (bandingkan 1 proses vs 4 proses):
-    pip install mpi4py numpy
-    mpiexec -n 1 python studikasus_2.py
-    mpiexec -n 4 python studikasus_2.py
-"""
 import numpy as np
 from mpi4py import MPI
 
-# --- Tahap 1: Pemodelan masalah dan data ---
+
 KAPASITAS_SUNGAI = 220       # debit maksimum sebelum meluap (m3/detik)
 AMBANG_SIAGA = 5.0           # peluang banjir (%) untuk status SIAGA
 TOTAL_SIMULASI = 8_000_000   # jumlah skenario (Tahap 2)
@@ -35,7 +20,7 @@ def simulasi(n, seed):
     return int((debit > KAPASITAS_SUNGAI).sum())
 
 
-# --- Tahap 3: Pemrosesan paralel dengan MPI ---
+
 comm.Barrier()
 mulai = MPI.Wtime()
 banjir_lokal = simulasi(TOTAL_SIMULASI // size, seed=rank)      # tiap proses bekerja
@@ -43,7 +28,7 @@ banjir_total = comm.reduce(banjir_lokal, op=MPI.SUM, root=0)    # gabungkan hasi
 comm.Barrier()
 waktu = MPI.Wtime() - mulai
 
-# --- Tahap 4: Hasil dan rekomendasi tindakan ---
+
 if rank == 0:
     total = (TOTAL_SIMULASI // size) * size
     peluang = banjir_total / total * 100
