@@ -52,3 +52,31 @@ Pemerintah Kota Tirta Raya memiliki sungai utama yang melintasi kawasan padat pe
 **Peran Mahasiswa Informatika dan Teknologi HPC:**
 
 HPC berperan sebagai mesin penghitung yang sangat cepat, sehingga jutaan skenario banjir dapat diselesaikan dalam waktu singkat dan hasilnya sempat dimanfaatkan untuk mengambil tindakan. Mahasiswa dan peneliti informatika berperan sebagai penghubung antara infrastruktur komputasi global dan kebutuhan masyarakat lokal, yaitu menjaga kualitas data masukan, menguji kewajaran model, dan menyajikan hasil dalam bentuk status peringatan yang mudah dipahami. Penetapan siaga dan perintah evakuasi tetap menjadi keputusan manusia di Dinas Penanggulangan Bencana, dengan hasil simulasi sebagai bahan pertimbangan.
+
+# Studi Kasus 3: Pemilihan Lokasi Gerai Baru Minimarket Menggunakan GIS (Berdasarkan Sesi 3: Career and Competition in Industrial Era with GIS)
+
+**Latar Belakang Kasus:**
+
+Warung Maju adalah jaringan minimarket yang berencana membuka satu gerai baru di Kota Sinar Pesisir. Manajemen memiliki enam lokasi kandidat, tetapi pemilihan sebelumnya hanya berdasarkan perkiraan dan harga sewa, sehingga beberapa gerai lama sepi pembeli karena berdekatan dengan kompetitor dan jauh dari permukiman. Tim data diminta memakai pendekatan Sistem Informasi Geografis (GIS) agar keputusan lokasi didukung data spasial.
+
+**Penerapan GIS dalam Pengambilan Keputusan:**
+
+**1. Pengumpulan Layer Data Spasial (Data apa yang dibutuhkan?)**
+
+Tim menyiapkan tiga layer data berbasis koordinat, yaitu titik permukiman penduduk (400 titik), lokasi minimarket kompetitor (5 titik), dan enam lokasi kandidat gerai beserta biaya sewanya.
+
+**2. Analisis Spasial (Apa yang diukur?)**
+
+Dua analisis dilakukan untuk setiap kandidat. Pertama, buffer radius 1 km untuk menghitung jumlah rumah yang berada dalam jangkauan gerai. Kedua, pengukuran jarak ke kompetitor terdekat dengan rumus haversine agar jarak dihitung berdasarkan koordinat di permukaan bumi.
+
+**3. Pembobotan dan Skoring (Bagaimana membandingkannya?)**
+
+Setiap kandidat diberi skor dari tiga faktor yang sudah dinormalisasi: jumlah rumah dalam buffer (bobot 50%), jarak ke kompetitor (bobot 30%), dan biaya sewa yang makin murah makin baik (bobot 20%). Bobot ini dapat disesuaikan oleh manajemen sesuai strategi bisnis.
+
+**4. Rekomendasi Keputusan (Lokasi mana yang dipilih?)**
+
+Hasil skoring menempatkan Lokasi 3 di peringkat pertama dengan skor 0,76, karena paling jauh dari kompetitor (2,57 km) meskipun sewanya relatif tinggi. Lokasi 2 dan 4 berada di peringkat berikutnya.
+
+**Peran GIS dan Kompetensi Karier di Era Industri:**
+
+GIS mengubah data lokasi yang tadinya tersebar menjadi informasi yang bisa dibandingkan secara objektif, sehingga perusahaan tidak lagi memilih lokasi hanya berdasarkan intuisi. Bagi lulusan informatika, kemampuan mengolah data spasial menjadi nilai tambah karier di berbagai industri seperti ritel, logistik, dan perencanaan kota. Meski begitu, skor hanya alat bantu. Faktor lain seperti izin usaha, kondisi jalan, dan rencana pengembangan wilayah tetap perlu dinilai manajemen sebelum keputusan akhir diambil.
