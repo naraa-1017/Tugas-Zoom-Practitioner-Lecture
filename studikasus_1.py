@@ -1,24 +1,10 @@
-"""
-Studi Kasus 1: Analisis Data dan AI pada Platform Kursus Online "BelajarKu"
-Berdasarkan Sesi 1: Make Sense of Data with Analysis and AI
-
-Alur: Descriptive -> Diagnostic -> Predictive -> Prescriptive
-Data yang dipakai adalah data sintetis (dibuat otomatis), jadi tidak perlu download dataset.
-
-Cara menjalankan:
-    pip install pandas numpy scikit-learn
-    python studikasus_1.py
-"""
-
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 
-# ---------------------------------------------------------------
-# 0. DATA PREPARATION: membuat data sintetis peserta kursus
-# ---------------------------------------------------------------
+
 np.random.seed(42)
 n = 1000
 
@@ -32,8 +18,7 @@ df = pd.DataFrame({
     "ada_interaksi_mentor": np.random.choice([0, 1], n),
 })
 
-# Aturan tersembunyi: peserta berhenti (dropout) jika jarang login,
-# tugas terlalu banyak, dan tidak ada interaksi mentor
+
 skor_risiko = (
     (df["login_per_minggu"] < 2) * 0.4
     + (df["jumlah_tugas"] > 8) * 0.25
@@ -43,12 +28,10 @@ skor_risiko = (
 )
 df["dropout"] = (skor_risiko > 0.55).astype(int)
 
-# Data pembersihan sederhana (sesuai tahap data preparation)
+
 df = df.drop_duplicates().dropna()
 
-# ---------------------------------------------------------------
-# 1. DESCRIPTIVE ANALYTICS: Apa yang terjadi?
-# ---------------------------------------------------------------
+
 print("=" * 60)
 print("1. DESCRIPTIVE ANALYTICS - Apa yang terjadi?")
 print("=" * 60)
@@ -57,9 +40,7 @@ print(f"Tingkat dropout     : {df['dropout'].mean() * 100:.1f}%")
 print("\nDropout per kategori kursus (%):")
 print((df.groupby("kategori_kursus")["dropout"].mean() * 100).round(1))
 
-# ---------------------------------------------------------------
-# 2. DIAGNOSTIC ANALYTICS: Mengapa terjadi?
-# ---------------------------------------------------------------
+
 print("\n" + "=" * 60)
 print("2. DIAGNOSTIC ANALYTICS - Mengapa terjadi?")
 print("=" * 60)
@@ -71,9 +52,7 @@ print("\nKorelasi fitur dengan dropout:")
 print(df.drop(columns="kategori_kursus").corr()["dropout"]
       .drop("dropout").sort_values().round(2))
 
-# ---------------------------------------------------------------
-# 3. PREDICTIVE ANALYTICS: Apa yang akan terjadi?
-# ---------------------------------------------------------------
+
 print("\n" + "=" * 60)
 print("3. PREDICTIVE ANALYTICS - Siapa yang berpotensi dropout?")
 print("=" * 60)
@@ -93,9 +72,7 @@ pentingnya = pd.Series(model.feature_importances_, index=X.columns)
 print("Faktor paling berpengaruh:")
 print(pentingnya.sort_values(ascending=False).head(4).round(3))
 
-# ---------------------------------------------------------------
-# 4. PRESCRIPTIVE ANALYTICS: Apa tindakan yang disarankan?
-# ---------------------------------------------------------------
+
 print("\n" + "=" * 60)
 print("4. PRESCRIPTIVE ANALYTICS - Rekomendasi tindakan")
 print("=" * 60)
@@ -108,9 +85,7 @@ print("- Sediakan sesi mentor untuk peserta berisiko tinggi")
 print("- Pecah video > 60 menit menjadi modul pendek")
 print("- Batasi jumlah tugas per modul maksimal 8")
 
-# ---------------------------------------------------------------
-# PERAN MANUSIA DAN GENERATIVE AI
-# ---------------------------------------------------------------
+
 print("\n" + "=" * 60)
 print("PERAN MANUSIA & GENERATIVE AI")
 print("=" * 60)
